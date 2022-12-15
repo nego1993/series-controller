@@ -11,9 +11,14 @@ class Series_controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        
+        $series = [
+            'serie 1',
+            'serie 2',
+            'serie 3'
+        ];
+        return view("series.index", compact('series'));
     }
 
     /**
