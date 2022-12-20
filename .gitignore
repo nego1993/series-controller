@@ -16,3 +16,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+nodesource_setup.sh

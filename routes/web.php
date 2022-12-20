@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/series', [Series_controller::class, 'index'] );
+Route::get('/series/criar', [Series_controller::class, 'create'] );
+Route::post('/series/criar', [Series_controller::class, 'create'] );
