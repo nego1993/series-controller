@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Serie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Series_controller extends Controller
 {
@@ -13,11 +15,8 @@ class Series_controller extends Controller
      */
     public function index(Request $request)
     {
-        $series = [
-            'serie 1',
-            'serie 2',
-            'serie 3'
-        ];
+        $series = Serie::query()->orderBy('name')->get();
+
         return view("series.index", compact('series'));
     }
 
@@ -39,7 +38,12 @@ class Series_controller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $serieName = $request->input('name');
+        $serie = new Serie();
+        $serie->name = $serieName;
+        $serie->save();
+
+        return redirect('/series');
     }
 
     /**

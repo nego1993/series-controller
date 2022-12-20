@@ -1,5 +1,6 @@
 <x-layout title="Cadastrar nova série">
-    <form action="" method="post">
+    <form action="/series/salvar" method="post">
+        @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Nome:</label>
             <input type="text" name="name" class="form-control" id="name">
