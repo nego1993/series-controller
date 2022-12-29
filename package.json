@@ -2,20 +2,22 @@
     "private": true,
     "scripts": {
         "dev": "mix",
-        "build": "mix build"
+        "build": "mix"
     },
     "devDependencies": {
+        "@fortawesome/fontawesome-free": "^6.2.1",
+        "autoprefixer": "^10.4.13",
         "axios": "^1.1.2",
         "laravel-mix": "^6.0.49",
         "laravel-vite-plugin": "^0.7.0",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
+        "postcss": "^8.4.20",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.57.1",
-        "sass-loader": "^12.6.0",
         "vite": "^3.0.0"
     },
     "dependencies": {
-        "bootstrap": "^5.2.3"
+        "bootstrap": "^5.2.3",
+        "font-awesome": "^4.7.0"
     }
 }

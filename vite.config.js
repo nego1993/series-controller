@@ -8,4 +8,9 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    resolve: {
+        alias: {
+            '~fa': path.resolve(__dirname, 'node_modules/@fortawesome/fontawesome-free/scss'),
+        }
+    },
 });
