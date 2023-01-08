@@ -16,8 +16,12 @@ class Series_controller extends Controller
     public function index(Request $request)
     {
         $series = Serie::query()->orderBy('name')->get();
+        $message = $request->session()->get('message.destroy');
+        $messagesuccess = $request->session()->get('message.success');
+        $request->session()->forget('message.destroy');
+        $request->session()->forget('message.success');
 
-        return view("series.index", compact('series'));
+        return view("series.index", compact('series'))->with('message', $message)->with('messagesuccess', $messagesuccess);
     }
 
     /**
@@ -38,7 +42,8 @@ class Series_controller extends Controller
      */
     public function store(Request $request)
     {
-        Serie::create($request->all());
+        $serie = Serie::create($request->all());
+        $request->session()->put("message.success", "Série $serie->name adicionada com sucesso");
 
         return to_route('series.index');
     }
@@ -60,9 +65,11 @@ class Series_controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, Serie $series)
     {
-        //
+
+        return view('series.edit')->with('serie', $series);
+
     }
 
     /**
@@ -72,9 +79,14 @@ class Series_controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Serie $series)
     {
-        //
+        $series->fill($request->all());
+        $series->save();
+
+        return to_route('series.index')
+        ->with('message.success', "Série $series->name atualizada com sucesso" );
+
     }
 
     /**
@@ -83,8 +95,15 @@ class Series_controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Serie $series, Request $request)
     {
-        //
+
+        // dd($request);
+        $series->delete();
+        Serie::destroy($request->id);
+
+        $request->session()->put('message.destroy', "Série $series->name removida com sucesso!");
+
+        return to_route('series.index');
     }
 }

@@ -18,5 +18,6 @@ Route::get('/', function () {
     return view('/series');
 });
 
-Route::resource('/series', Series_controller::class);
+Route::resource('/series', Series_controller::class)
+->except(['show']);
 
