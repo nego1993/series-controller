@@ -1,9 +1,9 @@
     <form action="{{$action}}" method="post">
         @csrf
 
-        @isset($name)
+        @if($update)
         @method('PUT')
-        @endisset
+        @endif
         <div class="mb-3">
             <label for="name" class="form-label">Nome:</label>
             <input type="text" name="name" class="form-control" id="name" @isset($name)value="{{$name}}"@endisset>

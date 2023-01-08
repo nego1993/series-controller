@@ -1,4 +1,4 @@
-<x-layout title="Séries">
+<x-layout title="{{__('messages.app_name')}}">
     <a href="{{route('series.create')}}" type="button" class="btn btn-outline-primary mb-3">Adicionar</a>
     @isset($message)
     <div class="alert alert-danger">
