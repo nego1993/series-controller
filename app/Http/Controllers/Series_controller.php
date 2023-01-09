@@ -16,7 +16,7 @@ class Series_controller extends Controller
      */
     public function index(Request $request)
     {
-        $series = Serie::query()->orderBy('name')->get();
+        $series = Serie::all();
         $message = $request->session()->get('message.destroy');
         $messagesuccess = $request->session()->get('message.success');
         $request->session()->forget('message.destroy');
@@ -44,7 +44,23 @@ class Series_controller extends Controller
     public function store(SeriesformRequest $request)
     {
 
+        // dd($request->all());
+
         $serie = Serie::create($request->all());
+        for ($season = 1; $season <= $request->seasonsqty ; $season++) { 
+            $season = $serie->season()->create([
+                "number" => $season,
+            ]);
+
+            for ($episodes = 1; $episodes <= $request->qtyepisodes  ; $episodes++) { 
+                $season->episodes()->create([
+                    "number" => $episodes
+                ]);
+            }
+
+        }
+
+
         $request->session()->put("message.success", "Série $serie->name adicionada com sucesso");
 
         return to_route('series.index');
@@ -67,7 +83,7 @@ class Series_controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Serie $series)
+    public function edit(Serie $series)
     {
 
         return view('series.edit')->with('serie', $series);
